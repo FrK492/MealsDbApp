@@ -1,4 +1,4 @@
-package com.farfun.mealz.ui.screens.categoryList
+package com.farfun.mealz.ui.screens.categoryDetail
 
 import android.widget.Toast
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,27 +11,27 @@ import com.farfun.mealz.ui.composables.CategoryListItem
 import com.farfun.mealz.ui.composables.CenteredCircularLoader
 
 @Composable
-fun CategoryList(
-    categoryListViewModel: CategoryListViewModel,
+fun CategoryDetail(
+    categoryDetailViewModel: CategoryDetailViewModel,
     onItemClick: (navParam: String) -> Unit
 ) {
-    val categories by categoryListViewModel.mealCategories.collectAsState()
-    val errorMessage by categoryListViewModel.errorMessage.collectAsState()
-    val loadingState by categoryListViewModel.loadingState.collectAsState()
+    val categoryDetails by categoryDetailViewModel.categoryDetails.collectAsState()
+    val loadingState by categoryDetailViewModel.loadingState.collectAsState()
+    val errorMessage by categoryDetailViewModel.errorMessage.collectAsState()
 
     if (errorMessage.isNotEmpty()) {
         Toast.makeText(LocalContext.current, errorMessage, Toast.LENGTH_LONG).show()
-        categoryListViewModel.clearError()
+        categoryDetailViewModel.clearErrorMessage()
     }
 
     if (!loadingState) {
         LazyColumn {
-            items(categories) { mealCategory ->
+            items(categoryDetails) { mealCategory ->
                 CategoryListItem(
-                    title = mealCategory.strCategory,
-                    description = mealCategory.strCategoryDescription,
-                    image = mealCategory.strCategoryThumb,
-                    onItemClick = fun (navParam: String) { onItemClick(navParam) }
+                    title = mealCategory.strMeal,
+                    description = mealCategory.strMealCategory,
+                    image = mealCategory.strMealThumb,
+                    onItemClick = fun (navParam: String) {onItemClick(navParam)}
                 )
             }
         }

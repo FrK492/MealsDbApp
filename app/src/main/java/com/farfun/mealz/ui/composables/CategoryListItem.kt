@@ -1,5 +1,6 @@
 package com.farfun.mealz.ui.composables
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,14 +35,16 @@ fun CategoryListItem(
     title: String,
     description: String,
     image: String,
-    onItemClick: () -> Unit
+    onItemClick: (navParam: String) -> Unit
 ) {
    Card(
        modifier = Modifier
            .fillMaxWidth()
            .height(120.dp)
-           .padding(horizontal = 10.dp, vertical = 5.dp),
-       onClick = onItemClick,
+           .padding(horizontal = 10.dp, vertical = 5.dp)
+           .clickable {
+                      onItemClick(title)
+           },
        elevation = CardDefaults.cardElevation(
            defaultElevation = 10.dp
        )

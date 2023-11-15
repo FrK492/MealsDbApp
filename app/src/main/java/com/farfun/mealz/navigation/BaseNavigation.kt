@@ -9,6 +9,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.farfun.mealz.ui.screens.categoryDetail.CategoryDetail
+import com.farfun.mealz.ui.screens.categoryDetail.CategoryDetailViewModel
 import com.farfun.mealz.ui.screens.categoryList.CategoryList
 import com.farfun.mealz.ui.screens.categoryList.CategoryListViewModel
 
@@ -24,7 +26,13 @@ fun BaseNavigation(
             NavHost(navController, startDestination) {
                 composable("categoryList") {
                     val categoryListViewModel = hiltViewModel<CategoryListViewModel>()
-                    CategoryList(categoryListViewModel) {
+                    CategoryList(categoryListViewModel) { navParam ->
+                        navController.navigate("category/$navParam")
+                    }
+                }
+                composable("category/{categoryName}") {
+                    val categoryDetailViewModel = hiltViewModel<CategoryDetailViewModel>()
+                    CategoryDetail(categoryDetailViewModel) {
 
                     }
                 }
