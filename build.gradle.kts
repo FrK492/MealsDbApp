@@ -10,7 +10,7 @@ buildscript {
     extra.set("ktxCoreVersion", "1.12.0")
     extra.set("appCompatVersion", "1.6.1")
     // Compose
-    extra.set("activityComposeVersion", "1.8.0")
+    extra.set("activityComposeVersion", "1.8.1")
     // Lifecycle
     extra.set("lifecycleVersion", "2.6.2")
     // Dagger Hilt
