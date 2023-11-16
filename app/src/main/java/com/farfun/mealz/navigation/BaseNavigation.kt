@@ -26,13 +26,13 @@ fun BaseNavigation(
             NavHost(navController, startDestination) {
                 composable("categoryList") {
                     val categoryListViewModel = hiltViewModel<CategoryListViewModel>()
-                    CategoryList(categoryListViewModel) { navParam ->
-                        navController.navigate("category/$navParam")
+                    CategoryList(categoryListViewModel) { _, paramTitle ->
+                        navController.navigate("category/$paramTitle")
                     }
                 }
                 composable("category/{categoryName}") {
                     val categoryDetailViewModel = hiltViewModel<CategoryDetailViewModel>()
-                    CategoryDetail(categoryDetailViewModel) {
+                    CategoryDetail(categoryDetailViewModel) { _, _ ->
 
                     }
                 }

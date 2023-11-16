@@ -13,7 +13,7 @@ import com.farfun.mealz.ui.composables.CenteredCircularLoader
 @Composable
 fun CategoryList(
     categoryListViewModel: CategoryListViewModel,
-    onItemClick: (navParam: String) -> Unit
+    onItemClick: (paramId: String, paramTitle: String) -> Unit
 ) {
     val categories by categoryListViewModel.mealCategories.collectAsState()
     val errorMessage by categoryListViewModel.errorMessage.collectAsState()
@@ -28,10 +28,11 @@ fun CategoryList(
         LazyColumn {
             items(categories) { mealCategory ->
                 CategoryListItem(
+                    id = mealCategory.idCategory,
                     title = mealCategory.strCategory,
                     description = mealCategory.strCategoryDescription,
                     image = mealCategory.strCategoryThumb,
-                    onItemClick = fun (navParam: String) { onItemClick(navParam) }
+                    onItemClick = fun (paramId: String, paramTitle: String) { onItemClick(paramId, paramTitle) }
                 )
             }
         }
