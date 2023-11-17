@@ -23,8 +23,8 @@ class CategoryDetailViewModel @Inject constructor(
     private val context: Application
 ): ViewModel() {
     private val _categoryDetails = MutableStateFlow<List<CategoryDetail>>(listOf())
-    private var _loadingState = MutableStateFlow(false)
-    private var _errorMessage = MutableStateFlow("")
+    private val _loadingState = MutableStateFlow(false)
+    private val _errorMessage = MutableStateFlow("")
     val categoryDetails: StateFlow<List<CategoryDetail>>
         get() = _categoryDetails
     val loadingState: StateFlow<Boolean>

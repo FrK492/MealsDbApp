@@ -22,8 +22,8 @@ class CategoryListViewModel @Inject constructor(
     private val context: Application
 ): ViewModel() {
     private val _mealCategories = MutableStateFlow<List<MealCategory>>(listOf())
-    private var _loadingState = MutableStateFlow(false)
-    private var _errorMessage = MutableStateFlow("")
+    private val _loadingState = MutableStateFlow(false)
+    private val _errorMessage = MutableStateFlow("")
 
     val mealCategories: StateFlow<List<MealCategory>>
         get() = _mealCategories
