@@ -3,6 +3,7 @@ package com.farfun.mealz.repository.implementations
 import com.farfun.mealz.data.dao.MealsDbDao
 import com.farfun.mealz.data.model.CategoryDetail
 import com.farfun.mealz.data.model.MealCategory
+import com.farfun.mealz.data.model.MealDetail
 import com.farfun.mealz.remote.MealsApi
 import com.farfun.mealz.repository.interfaces.MealsRepository
 import com.farfun.mealz.util.RequestResource
@@ -49,6 +50,24 @@ class MealsRepositoryImpl @Inject constructor(
             } finally {
                 dao.getCategoryDetail(categoryName).collect {
                     emit(RequestResource.success(it))
+                }
+            }
+        }
+    }
+
+    override suspend fun getMealDetails(mealId: String): Flow<RequestResource<MealDetail>> {
+        return flow {
+            emit(RequestResource.loading())
+            try {
+                val apiResponse = api.getMealDetails(mealId)
+                if (apiResponse.meals.isNotEmpty()) {
+                    dao.insertMealDetail(apiResponse.meals.first())
+                }
+            } catch (ex: Exception) {
+                emit(RequestResource.failure(ex.message.toString()))
+            } finally {
+                dao.getMealDetail(mealId).collect {
+                    emit(RequestResource.success(it.first()))
                 }
             }
         }

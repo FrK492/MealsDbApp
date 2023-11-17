@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.farfun.mealz.data.model.CategoryDetail
 import com.farfun.mealz.data.model.MealCategory
+import com.farfun.mealz.data.model.MealDetail
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -21,4 +22,10 @@ interface MealsDbDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategoryDetails(categoryDetails: List<CategoryDetail>)
+
+    @Query("SELECT * from meals WHERE idMeal=:mealId")
+    fun getMealDetail(mealId: String): Flow<List<MealDetail>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMealDetail(mealDetail: MealDetail)
 }

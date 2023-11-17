@@ -1,6 +1,8 @@
 package com.farfun.mealz.ui.screens.categoryDetail
 
+import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CategoryDetailViewModel @Inject constructor(
     private val repository: MealsRepository,
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
+    private val context: Application
 ): ViewModel() {
     private val _categoryDetails = MutableStateFlow<List<CategoryDetail>>(listOf())
     private var _loadingState = MutableStateFlow(false)
@@ -33,8 +36,13 @@ class CategoryDetailViewModel @Inject constructor(
         getCategoryDetails()
     }
 
-    fun clearErrorMessage() {
+    private fun clearErrorMessage() {
         _errorMessage.tryEmit("")
+    }
+
+    fun showErrorMessage(errorMessage: String) {
+        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+        clearErrorMessage()
     }
 
     private fun getCategoryDetails() = viewModelScope.launch(Dispatchers.IO) {

@@ -1,6 +1,8 @@
 package com.farfun.mealz.ui.screens.categoryList
 
+import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.farfun.mealz.data.model.MealCategory
@@ -16,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CategoryListViewModel @Inject constructor(
-    private val mealsRepository: MealsRepository
+    private val mealsRepository: MealsRepository,
+    private val context: Application
 ): ViewModel() {
     private val _mealCategories = MutableStateFlow<List<MealCategory>>(listOf())
     private var _loadingState = MutableStateFlow(false)
@@ -33,8 +36,13 @@ class CategoryListViewModel @Inject constructor(
         getAllCategories()
     }
 
-    fun clearError() {
+    private fun clearError() {
         _errorMessage.tryEmit("")
+    }
+
+    fun showErrorMessage(errorMessage: String) {
+        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+        clearError()
     }
 
     private fun getAllCategories() = viewModelScope.launch(Dispatchers.IO) {
