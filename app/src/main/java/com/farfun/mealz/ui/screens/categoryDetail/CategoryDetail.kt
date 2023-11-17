@@ -29,7 +29,8 @@ fun CategoryDetail(
                     title = mealCategory.strMeal,
                     description = mealCategory.strMealCategory,
                     image = mealCategory.strMealThumb,
-                    onItemClick = fun (paramId: String, paramTitle: String) {onItemClick(paramId, paramTitle)}
+                    onItemClick = fun (paramId: String, paramTitle: String) {onItemClick(paramId, paramTitle)},
+                    onItemLongPress = {}
                 )
             }
         }

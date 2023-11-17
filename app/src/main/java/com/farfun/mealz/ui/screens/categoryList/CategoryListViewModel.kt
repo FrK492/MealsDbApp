@@ -24,6 +24,7 @@ class CategoryListViewModel @Inject constructor(
     private val _mealCategories = MutableStateFlow<List<MealCategory>>(listOf())
     private val _loadingState = MutableStateFlow(false)
     private val _errorMessage = MutableStateFlow("")
+    private val _bottomSheetText = MutableStateFlow("")
 
     val mealCategories: StateFlow<List<MealCategory>>
         get() = _mealCategories
@@ -31,6 +32,8 @@ class CategoryListViewModel @Inject constructor(
         get() = _loadingState
     val errorMessage: StateFlow<String>
         get() = _errorMessage
+    val bottomSheetText: StateFlow<String>
+        get() = _bottomSheetText
 
     init {
         getAllCategories()
@@ -43,6 +46,14 @@ class CategoryListViewModel @Inject constructor(
     fun showErrorMessage(errorMessage: String) {
         Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
         clearError()
+    }
+
+    fun onItemLongPress(bottomSheetText: String) {
+        _bottomSheetText.tryEmit(bottomSheetText)
+    }
+
+    fun clearBottomSheet() {
+        _bottomSheetText.tryEmit("")
     }
 
     private fun getAllCategories() = viewModelScope.launch(Dispatchers.IO) {

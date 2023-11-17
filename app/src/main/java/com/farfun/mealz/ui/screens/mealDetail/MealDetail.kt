@@ -117,7 +117,7 @@ fun MealDetail(
                             modifier = Modifier.padding(bottom = 5.dp)
                         )
                         for (index in 0..19) {
-                            if (!measureList.getOrNull(index).isNullOrEmpty() || !ingredientList.getOrNull(index).isNullOrEmpty())
+                            if (!measureList.getOrNull(index).isNullOrBlank() || !ingredientList.getOrNull(index).isNullOrBlank())
                                 Text(
                                     text = measureList.getOrElse(index) {""} + " " + ingredientList.getOrElse(index) {""},
                                     fontSize = 12.sp,
