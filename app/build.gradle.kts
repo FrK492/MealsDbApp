@@ -3,6 +3,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.firebase-perf")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -55,8 +58,7 @@ dependencies {
     implementation("androidx.core:core-ktx:${rootProject.extra.get("ktxCoreVersion")}")
     implementation("androidx.appcompat:appcompat:${rootProject.extra.get("appCompatVersion")}")
     // Compose
-    val composeBom = platform("androidx.compose:compose-bom:2023.10.01")
-    implementation(composeBom)
+    implementation(platform("androidx.compose:compose-bom:${rootProject.extra.get("composeBomVersion")}"))
     implementation("androidx.compose.material:material")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -87,6 +89,11 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:${rootProject.extra.get("hiltNavigationComposeVersion")}")
     // Coil
     implementation("io.coil-kt:coil-compose:${rootProject.extra.get("coilVersion")}")
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:${rootProject.extra.get("firebaseBomVesion")}"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-perf")
 }
 kapt {
     correctErrorTypes = true

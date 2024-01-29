@@ -2,7 +2,7 @@ package com.farfun.mealz.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowLeft
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -49,7 +49,7 @@ fun BaseNavigation(
                     if (currentNavState?.destination?.route !== "categoryList") {
                         IconButton(onClick = { navController.popBackStack() }) {
                             Icon(
-                                imageVector = Icons.Outlined.KeyboardArrowLeft,
+                                imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowLeft,
                                 contentDescription = ""
                             )
                         }
