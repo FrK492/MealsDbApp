@@ -21,7 +21,7 @@ buildscript {
     // Room
     extra.set("roomVersion", "2.6.1")
     // Navigation
-    extra.set("navigationComposeVersion", "2.7.6")
+    extra.set("navigationComposeVersion", "2.7.7")
     extra.set("hiltNavigationComposeVersion", "1.1.0")
     // Coil
     extra.set("coilVersion", "2.5.0")
@@ -30,7 +30,7 @@ buildscript {
 }
 
 plugins {
-    id("com.android.application") version "8.2.2" apply false
+    id("com.android.application") version "8.3.0-rc02" apply false
     id("org.jetbrains.kotlin.android") version "1.9.22" apply false
     id("com.google.dagger.hilt.android") version "2.48.1" apply false
     id("com.google.gms.google-services") version "4.4.0" apply false
